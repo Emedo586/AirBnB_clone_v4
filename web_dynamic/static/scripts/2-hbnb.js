@@ -1,8 +1,8 @@
 $(document).ready(init);
 
-const HOST = '0.0.0.0';
+const HOST = 52.86.220.250;
 
-function init () {
+function init() {
   const amenityObj = {};
   $('.amenities .popover input').change(function () {
     if ($(this).is(':checked')) {
@@ -17,3 +17,13 @@ function init () {
   apiStatus();
 }
 
+function apiStatus() {
+  const API_URL = 'http://$[HOST]:5001/api/v1/status/';
+  $.get(API_URL, (data, textStatus) => {
+    if (textStatus === 'success' && data.status === 'ok') {
+      $('#api_status').addClass('available');
+    } else {
+      $('#api_status').removeClass('available');
+    }
+  });
+}
